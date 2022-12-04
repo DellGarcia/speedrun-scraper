@@ -307,4 +307,5 @@ poetry.toml
 
 /__pycache__
 /games
+/results
 

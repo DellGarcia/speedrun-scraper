@@ -50,6 +50,7 @@ def search_modality_links_for(category_links: dict, driver: WebDriver, collected
                 for link in links:
                     href = link.get_attribute('href')
                     if href is not None and '(empty)' not in link.text:
-                        k = f'{key}/{link.text}'.strip().replace(' ', '_')
+                        text = link.text.replace('/', '-')
+                        k = f'{key}/{text}'.strip().replace(' ', '_')
                         if k not in collected_links.keys():
                             collected_links[k] = href

@@ -1,6 +1,7 @@
 import os
 import re
 import time
+import csv
 
 from selenium.webdriver.firefox.webdriver import WebDriver
 from selenium.webdriver.common.by import By
@@ -35,9 +36,24 @@ def search_game_stats_for(driver: WebDriver, destination_folder: str, url: str, 
     except TimeoutException:
         return
 
+    # table_header = table.find_element(By.TAG_NAME, 'thead')
+    table_header = table.find_elements(By.XPATH, '//*[@id="game-leaderboard"]/div[2]/table/thead/tr[1]/td')
+
+    headers = list()
+    for el in table_header:
+        content = el.get_attribute('innerHTML')
+        parts = content.split('>')
+
+        for part in parts:
+            if len(part) > 0:
+                if part[0] != '<':
+                    headers.append(part.split('<')[0])
+
+    headers.append('country')
+
     table_rows = table.find_elements(By.TAG_NAME, 'tr')
 
-    result = ''
+    result = [headers]
 
     for row in table_rows:
         line = row.text.replace('\n', ',')
@@ -59,15 +75,16 @@ def search_game_stats_for(driver: WebDriver, destination_folder: str, url: str, 
         except NoSuchElementException:
             line = f'{line},{player_nationality}'
 
-        result += line
-        result += '\n'
+        result.append(line.split(','))
 
     file_path = f'{destination_folder}/page-{page}.csv'
 
     if not os.path.exists(destination_folder):
         os.makedirs(destination_folder)
 
-    with open(file_path, 'w') as w:
-        w.write(result)
+    with open(file_path, mode='w', encoding="utf-8") as file:
+        for row in result:
+            writer = csv.writer(file)
+            writer.writerow(row)
 
     search_game_stats_for(driver, destination_folder, url, page + 1)

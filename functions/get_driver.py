@@ -10,6 +10,5 @@ def get_driver() -> WebDriver:
     from selenium.webdriver.firefox.options import Options
 
     options = Options()
-    # options.add_argument('--headless')
 
     return webdriver.Firefox(options=options, executable_path=executable_path)

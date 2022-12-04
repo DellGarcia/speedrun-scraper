@@ -19,7 +19,8 @@ def search_category_links_for(game_name: str, game_url: str, driver: WebDriver, 
         categories_link = categories_el.find_elements(By.TAG_NAME, 'a')
 
         for link in categories_link:
-            key = f'games/{game_name}/{link.text}'.strip().replace(' ', '_')
+            text = link.text.replace('/', '-')
+            key = f'games/{game_name}/{text}'.strip().replace(' ', '_')
             if key not in collected_links.keys():
                 collected_links[key] = link.get_attribute('href')
 

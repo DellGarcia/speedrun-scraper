@@ -35,7 +35,8 @@ def search_composed_modality_links_for(composed_links: dict, driver: WebDriver, 
         for link in modality_listbox_options:
             href = link.get_attribute('href')
             if href is not None and '(empty)' not in link.text:
-                links[link.text] = href
+                text = link.text.replace('/', '-')
+                links[text] = href
 
         for link in links:
             driver.get(links[link])
@@ -51,6 +52,8 @@ def search_composed_modality_links_for(composed_links: dict, driver: WebDriver, 
             for final_link in modality_links:
                 href = final_link.get_attribute('href')
                 if href is not None and '(empty)' not in final_link.text:
-                    k = f'{key}/{link}/{final_link.text}'.strip().replace(' ', '_')
+                    link_text = link.replace('/', '-')
+                    sub_link_text = final_link.text.replace('/', '-')
+                    k = f'{key}/{link_text}/{sub_link_text}'.strip().replace(' ', '_')
                     if k not in collected_links.keys():
                         collected_links[k] = href
