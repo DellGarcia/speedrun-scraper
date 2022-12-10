@@ -49,7 +49,7 @@ def search_game_stats_for(driver: WebDriver, destination_folder: str, url: str, 
                 if part[0] != '<':
                     headers.append(part.split('<')[0])
 
-    headers.append('country')
+    headers.append('Country')
 
     table_rows = table.find_elements(By.TAG_NAME, 'tr')
 

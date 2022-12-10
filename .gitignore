@@ -237,7 +237,6 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
 .venv
 env/
 venv/
@@ -308,4 +307,5 @@ poetry.toml
 /__pycache__
 /games
 /results
+/game_links
 

@@ -3,13 +3,18 @@ import threading
 from functions import get_driver
 from functions import search_game_stats_for
 
-num_threads = 4
+from dotenv import load_dotenv
+from os import getenv
+
+load_dotenv()
+
+num_threads = getenv('NUM_THREADS')
 drivers = []
 threads_payload = {}
 
 
-def get_stats():
-    with open('./links.csv', 'r') as r:
+def get_stats(game_name):
+    with open(f'game_links/{game_name}/links.csv', 'r') as r:
         file_text = r.read()
 
     lines = file_text.split('\n')

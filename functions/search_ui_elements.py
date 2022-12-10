@@ -24,5 +24,5 @@ def get_elements_if_exists(driver: WebDriver, element_name: str, parent_element=
         else:
             return driver.find_elements(By.XPATH, os.getenv(element_name))
     except NoSuchElementException:
-        # print(element_name + ' not exists...')
+        print(element_name + ' not exists...')
         return None
