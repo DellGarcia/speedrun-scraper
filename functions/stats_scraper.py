@@ -8,7 +8,7 @@ from os import getenv
 
 load_dotenv()
 
-num_threads = getenv('NUM_THREADS')
+num_threads = int(getenv('NUM_THREADS'))
 drivers = []
 threads_payload = {}
 
