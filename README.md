@@ -52,7 +52,7 @@ Tive que refatorar o código algumas vezes também, a pricipio pensava em criar 
 No código final o fluxo ficou o seguinte utilizando o selenium entro na página do jogo e coleto os links de todas as categorias de speedrun para aquele jogo, fazendo dessa forma consegui simplificar bastante a etapa de coleta dos dados. Os links são salvos juntamente com a hierarquia de pastas de destino na pasta game_links seguido a seguinte estrutura:
 
 ```bash
-/game_links/<game_name>/links.csv
+game_links/<game_name>/links.csv
 ```
 Coletado os links agora partimos para a etapa de coleta dos dados, então basta ler o arquivo de links do jogo e coletador os dados da tabela para cada link.
 Aqui utilizei alguns conceitos interessantes o primeiro foi pra resolver as paginações da tabela, para isso utilizei a funções recursivas, então basicamente vou pegando os dados de cada página até não ter mais páginas para pegar. O segundo ponto interresante foi que dei uma otimizada no processo separando em threads, no meu PC utilizei 4 threads e dividi os links iguamente entre essas threads isso ajudou a reduzir um pouco o tempo de coletar os dados. A custo de um pouco mais de processamento.
