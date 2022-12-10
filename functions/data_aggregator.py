@@ -16,6 +16,10 @@ def aggregate_game_data(game_name):
     dir_path = f"games/{game_name}".lower()
     result_path = f'results/{game_name}'.lower()
 
+    if not path.exists(dir_path):
+        print(f'A pasta {dir_path} não foi encontrada...')
+        print('O arquivo data_scrapper deve ser executado primeiro!')
+
     if path.exists(result_path):
         rmtree(result_path, ignore_errors=False, onerror=None)
 
